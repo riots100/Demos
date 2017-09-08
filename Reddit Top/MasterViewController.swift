@@ -13,6 +13,7 @@ class MasterViewController: UITableViewController {
     var detailViewController: DetailViewController? = nil
     var objects = [Any]()
 
+    let redditManager = RedditManager();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,14 @@ class MasterViewController: UITableViewController {
     }
 
     func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        redditManager.getEntries { (entry, error) in
+            print("here")
+        }
+        
+//        objects.insert(NSDate(), at: 0)
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     // MARK: - Segues
