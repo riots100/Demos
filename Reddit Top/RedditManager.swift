@@ -16,14 +16,19 @@ class RedditManager {
     var entries: [RedditEntry] = []
     var errorMessage = ""
 
+    var dataTask: URLSessionDataTask?
+    
     func getEntries(completion: @escaping QueryResult) {
         
+        dataTask?.cancel()
+
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        let url = URL(string: "https://www.reddit.com/top.json?limit=2")!
+        let url = URL(string: "https://www.reddit.com/top.json?limit=25")!
         
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
+        dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
+            
+            defer { self.dataTask = nil }
             
             if error != nil {
                 
@@ -34,7 +39,9 @@ class RedditManager {
                 do {
                     if let responseJSON = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? JSONDictionary {
                         self.updateEntries(responseJSON)
-                        completion(self.entries, self.errorMessage)
+                        DispatchQueue.main.async {
+                            completion(self.entries, self.errorMessage)
+                        }
                     }
                 } catch let parseError as NSError {
                     completion(self.entries, parseError.localizedDescription)
@@ -42,7 +49,7 @@ class RedditManager {
             }
         })
         
-        task.resume()
+        dataTask?.resume()
     }
 
     

@@ -22,14 +22,14 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
+//        if let split = splitViewController {
+//            let controllers = split.viewControllers
+//            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+//        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
 
@@ -40,8 +40,13 @@ class MasterViewController: UITableViewController {
 
     func insertNewObject(_ sender: Any) {
         
-        redditManager.getEntries { (entry, error) in
-            print("here")
+        redditManager.getEntries { (entries, error) in
+            
+            if let redditEntries = entries {
+                self.objects = redditEntries
+                self.tableView.reloadData()
+            }
+            
         }
         
 //        objects.insert(NSDate(), at: 0)
@@ -74,11 +79,14 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RedditEntryCell", for: indexPath) as? RedditEntryTableViewCell
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
-        return cell
+        let object = objects[indexPath.row] as! RedditEntry
+        
+        cell?.updateTitle(title: object.title)
+        
+//        cell?.titleLabel!.text = object.title
+        return cell!
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
