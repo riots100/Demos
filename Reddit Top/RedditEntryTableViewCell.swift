@@ -11,7 +11,8 @@ import UIKit
 class RedditEntryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,11 +25,13 @@ class RedditEntryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateTitle(title: String) {
+    func updateText(_ title: String, _ author: String, _ date: String) {
         
         self.titleLabel.text = title
         self.titleLabel.sizeToFit()
         
+        self.authorLabel.text = author
+        self.dateLabel.text = date
     }
 
 }

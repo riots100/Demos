@@ -10,44 +10,51 @@ import Foundation
 
 enum RedditEntryError: Error {
     case missing(String)
-    case URLNotValid(String)
 }
 
 public struct RedditEntry {
 
     public let title: String
+    public let author: String
     public let thumbnailURL: URL
     public let imageURL: URL
+    public let createdAt_UTC: Date
+    
+    public let dateFormat = "EEE, MMM d, yyyy - h:mm a"
     
     public init(json: [String: Any]) throws {
         
+        //title
         guard let container = json["data"] as? [String: Any],
             let title = container["title"] as? String else {
                 throw RedditEntryError.missing("title")
         }
-        
         self.title = title
-
-        guard let thumbnailLink = container["thumbnail"] as? String else {
+        //thunbnail URL
+        guard let thumbnailLink = container["thumbnail"] as? String,
+            let thumbNailURL = URL(string: thumbnailLink) else {
             throw RedditEntryError.missing("thumbnail")
         }
-        
-        guard let thumbNailURL = URL(string: thumbnailLink) else {
-            throw RedditEntryError.URLNotValid(thumbnailLink)
-        }
-        
         self.thumbnailURL = thumbNailURL
-        
-        
-        guard let imageLink = container["url"] as? String else {
+        //image URL
+        guard let imageLink = container["url"] as? String,
+            let imageLinkURL = URL(string: imageLink) else {
             throw RedditEntryError.missing("url")
         }
-        
-        guard let imageLinkURL = URL(string: imageLink) else {
-            throw RedditEntryError.URLNotValid(imageLink)
-        }
-
         self.imageURL = imageLinkURL
+        //author
+        guard let author = container["author"] as? String else {
+            throw RedditEntryError.missing("author")
+        }
+        self.author = author
+        //created
+        guard let created = container["created_utc"] as? TimeInterval else {
+            throw RedditEntryError.missing("created_utc")
+        }
+        let createdDate = Date(timeIntervalSince1970: created)
+        self.createdAt_UTC = createdDate
     }
 
 }
+
+

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -58,16 +59,42 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q73-9I-SNA">
+                                            <rect key="frame" x="85" y="83" width="140" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="mHI-0N-QOt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kua-er-Iu4">
+                                            <rect key="frame" x="233" y="83" width="134" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="69X-tV-CQw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="H4C-OB-ZqJ" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="8" id="44b-HU-kGS"/>
+                                        <constraint firstItem="kua-er-Iu4" firstAttribute="bottom" secondItem="37f-cq-3Eg" secondAttribute="bottomMargin" id="7c0-Td-8BF"/>
+                                        <constraint firstItem="q73-9I-SNA" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" constant="77" id="8Ch-rd-ryt"/>
                                         <constraint firstAttribute="bottom" secondItem="H4C-OB-ZqJ" secondAttribute="bottom" priority="250" constant="8" id="BMk-oc-BxN"/>
+                                        <constraint firstItem="kua-er-Iu4" firstAttribute="leading" secondItem="q73-9I-SNA" secondAttribute="trailing" constant="8" id="Dsg-9T-Qpt"/>
                                         <constraint firstAttribute="trailing" secondItem="H4C-OB-ZqJ" secondAttribute="trailing" constant="8" id="FfD-ZE-Tac"/>
+                                        <constraint firstItem="q73-9I-SNA" firstAttribute="bottom" secondItem="37f-cq-3Eg" secondAttribute="bottomMargin" id="Flm-nm-IZH"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="q73-9I-SNA" secondAttribute="trailing" constant="142" id="Mtd-2V-gKr"/>
                                         <constraint firstItem="H4C-OB-ZqJ" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" constant="85" id="ei2-4d-u8i"/>
+                                        <constraint firstItem="kua-er-Iu4" firstAttribute="trailing" secondItem="37f-cq-3Eg" secondAttribute="trailingMargin" id="g4I-5b-ajo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
+                                    <outlet property="authorLabel" destination="q73-9I-SNA" id="rU8-YR-RXI"/>
+                                    <outlet property="dateLabel" destination="kua-er-Iu4" id="jkq-pM-kqS"/>
                                     <outlet property="titleLabel" destination="H4C-OB-ZqJ" id="maY-pO-hQ8"/>
                                 </connections>
                             </tableViewCell>
@@ -78,7 +105,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Top Reddit" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>

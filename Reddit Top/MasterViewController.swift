@@ -17,10 +17,8 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(getRedditEntries(_:)))
         navigationItem.rightBarButtonItem = addButton
 //        if let split = splitViewController {
 //            let controllers = split.viewControllers
@@ -29,8 +27,8 @@ class MasterViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-//        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,7 +36,7 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(_ sender: Any) {
+    func getRedditEntries(_ sender: Any) {
         
         redditManager.getEntries { (entries, error) in
             
@@ -48,10 +46,6 @@ class MasterViewController: UITableViewController {
             }
             
         }
-        
-//        objects.insert(NSDate(), at: 0)
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     // MARK: - Segues
@@ -79,13 +73,15 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "RedditEntryCell", for: indexPath) as? RedditEntryTableViewCell
 
-        let object = objects[indexPath.row] as! RedditEntry
+        let redditEntry = objects[indexPath.row] as! RedditEntry
         
-        cell?.updateTitle(title: object.title)
+        let localCreatedDate = redditEntry.createdAt_UTC.localStringWithFormat(redditEntry.dateFormat)
         
-//        cell?.titleLabel!.text = object.title
+        cell?.updateText(redditEntry.title, redditEntry.author, localCreatedDate)
+    
         return cell!
     }
 

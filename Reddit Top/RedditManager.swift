@@ -75,3 +75,16 @@ class RedditManager {
     }
     
 }
+
+extension Date {
+    func localStringWithFormat(_ dateFormat: String) -> String {
+        // change to a readable time format and change to local time zone
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = TimeZone.current
+        let timeStamp = dateFormatter.string(from: self)
+        
+        return timeStamp
+    }
+}
+
