@@ -76,7 +76,7 @@ class MasterViewController: UITableViewController {
         
         let localCreatedDate = redditEntry.createdAt_UTC.timeAgoSinceDate()
         
-        cell?.updateText(redditEntry.title, redditEntry.author, localCreatedDate)
+        cell?.updateText(redditEntry.title, redditEntry.author, localCreatedDate, redditEntry.num_comments)
     
         redditManager.getThumbNail(redditEntry.thumbnailURL) { (image) in
 

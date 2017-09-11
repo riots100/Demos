@@ -18,8 +18,6 @@ class RedditManager {
 
     var dataTask: URLSessionDataTask?
     
-    
-//    var imageTask: URLSessionDownloadTask?
     var imageCache: NSCache<AnyObject, AnyObject>
     
     init() {
@@ -68,12 +66,12 @@ class RedditManager {
         self.entries.removeAll()
         
         guard let feed = jsonDict["data"] as? [String: Any],
-            let apps = feed["children"] as? [[String: Any]] else {
+            let redditEndtries = feed["children"] as? [[String: Any]] else {
                 print("empty dictionary")
                 return;
         }
 
-        for entry in apps {
+        for entry in redditEndtries {
             
             do {
                 let redditEntry = try RedditEntry(json: entry)

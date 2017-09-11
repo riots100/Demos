@@ -19,6 +19,7 @@ public struct RedditEntry {
     public let thumbnailURL: URL
     public let imageURL: URL
     public let createdAt_UTC: Date
+    public let num_comments: Int
     
     public let dateFormat = "EEE, MMM d, yyyy - h:mm a"
     
@@ -53,6 +54,11 @@ public struct RedditEntry {
         }
         let createdDate = Date(timeIntervalSince1970: created)
         self.createdAt_UTC = createdDate
+        //number of comments
+        guard let numComments = container["num_comments"] as? Int else {
+            throw RedditEntryError.missing("num_comments")
+        }
+        self.num_comments = numComments
     }
 
 }

@@ -14,6 +14,7 @@ class RedditEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var commentCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,13 +27,14 @@ class RedditEntryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateText(_ title: String, _ author: String, _ date: String) {
+    func updateText(_ title: String, _ author: String, _ date: String, _ commentCount: Int) {
         
         self.titleLabel.text = title
         self.titleLabel.sizeToFit()
         
         self.authorLabel.text = author
         self.dateLabel.text = date
+        self.commentCountLabel.text = "\(commentCount)"
     }
 
     func updateThumbNailImage(_ image: UIImage) {
