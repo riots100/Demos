@@ -13,6 +13,7 @@ class RedditEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,4 +35,11 @@ class RedditEntryTableViewCell: UITableViewCell {
         self.dateLabel.text = date
     }
 
+    func updateThumbNailImage(_ image: UIImage) {
+        
+        self.thumbnailImageView.image = image
+        self.thumbnailImageView.alpha = 1.0
+        
+    }
+    
 }

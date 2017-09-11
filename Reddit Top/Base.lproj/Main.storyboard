@@ -77,16 +77,23 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Reddit_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="BRH-ny-YER">
+                                            <rect key="frame" x="0.0" y="0.0" width="77" height="106"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="H4C-OB-ZqJ" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" constant="8" id="44b-HU-kGS"/>
                                         <constraint firstItem="kua-er-Iu4" firstAttribute="bottom" secondItem="37f-cq-3Eg" secondAttribute="bottomMargin" id="7c0-Td-8BF"/>
                                         <constraint firstItem="q73-9I-SNA" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" constant="77" id="8Ch-rd-ryt"/>
+                                        <constraint firstAttribute="bottom" secondItem="BRH-ny-YER" secondAttribute="bottom" id="ALF-5W-Bgh"/>
                                         <constraint firstAttribute="bottom" secondItem="H4C-OB-ZqJ" secondAttribute="bottom" priority="250" constant="8" id="BMk-oc-BxN"/>
+                                        <constraint firstItem="BRH-ny-YER" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="top" id="DB9-u9-UMV"/>
                                         <constraint firstItem="kua-er-Iu4" firstAttribute="leading" secondItem="q73-9I-SNA" secondAttribute="trailing" constant="8" id="Dsg-9T-Qpt"/>
                                         <constraint firstAttribute="trailing" secondItem="H4C-OB-ZqJ" secondAttribute="trailing" constant="8" id="FfD-ZE-Tac"/>
                                         <constraint firstItem="q73-9I-SNA" firstAttribute="bottom" secondItem="37f-cq-3Eg" secondAttribute="bottomMargin" id="Flm-nm-IZH"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="q73-9I-SNA" secondAttribute="trailing" constant="142" id="Mtd-2V-gKr"/>
+                                        <constraint firstItem="BRH-ny-YER" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" id="YX3-np-HV9"/>
+                                        <constraint firstItem="q73-9I-SNA" firstAttribute="leading" secondItem="BRH-ny-YER" secondAttribute="trailing" constant="8" id="b6B-jp-8SY"/>
                                         <constraint firstItem="H4C-OB-ZqJ" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leading" constant="85" id="ei2-4d-u8i"/>
                                         <constraint firstItem="kua-er-Iu4" firstAttribute="trailing" secondItem="37f-cq-3Eg" secondAttribute="trailingMargin" id="g4I-5b-ajo"/>
                                     </constraints>
@@ -95,6 +102,7 @@
                                 <connections>
                                     <outlet property="authorLabel" destination="q73-9I-SNA" id="rU8-YR-RXI"/>
                                     <outlet property="dateLabel" destination="kua-er-Iu4" id="jkq-pM-kqS"/>
+                                    <outlet property="thumbnailImageView" destination="BRH-ny-YER" id="mnc-E0-yft"/>
                                     <outlet property="titleLabel" destination="H4C-OB-ZqJ" id="maY-pO-hQ8"/>
                                 </connections>
                             </tableViewCell>
@@ -112,4 +120,7 @@
             <point key="canvasLocation" x="708" y="-630.13493253373315"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Reddit_Logo.png" width="396" height="396"/>
+    </resources>
 </document>
