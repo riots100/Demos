@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol thumbNailSelectedProtocol: class {
+    
+    func didSelectThumbnail(row: Int)
+    
+}
+
 class RedditEntryTableViewCell: UITableViewCell {
 
+    weak var delegate: thumbNailSelectedProtocol?
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -19,12 +27,20 @@ class RedditEntryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let tapRecognizer = UITapGestureRecognizer(target: self, action:  #selector(thumbnailTapped(_:)))
+        thumbnailImageView.addGestureRecognizer(tapRecognizer)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func thumbnailTapped(_ tapRecognizer: UITapGestureRecognizer) {
+
+        delegate?.didSelectThumbnail(row: self.tag)
+        
     }
     
     func updateText(_ title: String, _ author: String, _ date: String, _ commentCount: Int) {

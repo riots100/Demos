@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, thumbNailSelectedProtocol {
 
     var redditEntries = [RedditEntry]()
 
@@ -19,6 +19,7 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(getRedditEntries(_:)))
         navigationItem.rightBarButtonItem = addButton
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +48,7 @@ class MasterViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show-detail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let entry = redditEntries[indexPath.row]
+            if let entry = sender as? RedditEntry {
                 let controller = segue.destination as! DetailViewController
                 controller.redditManager = self.redditManager
                 controller.redditEntryItem = entry
@@ -76,16 +76,21 @@ class MasterViewController: UITableViewController {
         let localCreatedDate = redditEntry.createdAt_UTC.timeAgoSinceDate()
         
         cell?.updateText(redditEntry.title, redditEntry.author, localCreatedDate, redditEntry.num_comments)
-    
+        cell?.tag = indexPath.row
+        cell?.delegate = self;
+        
         redditManager.getImage(redditEntry.thumbnailURL) { (image) in
 
             //make sure the cell is on screen
             if let updateCell = tableView.cellForRow(at: indexPath) as? RedditEntryTableViewCell {
+                //do we have an image
                 if let img = image {
                     updateCell.updateThumbNailImage(img)
                 } else {
                     updateCell.setPlaceholderImage()
                 }
+            } else {
+                cell?.setPlaceholderImage()
             }
             
         }
@@ -93,6 +98,13 @@ class MasterViewController: UITableViewController {
         return cell!
     }
 
+    // MARK: - thumbNailSelectedProtocol
+    
+    func didSelectThumbnail(row: Int) {
+        
+        let entry = redditEntries[row]
+        self.performSegue(withIdentifier: "show-detail", sender: entry)
+    }
 
 }
 

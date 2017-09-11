@@ -108,6 +108,10 @@ class RedditManager {
                         DispatchQueue.main.async {
                             completion(img)
                         }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(nil)
+                        }
                     }
                 }
             })
