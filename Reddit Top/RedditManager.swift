@@ -82,7 +82,7 @@ class RedditManager {
         }
     }
     
-    func getThumbNail(_ imageURL: URL, completion: @escaping (UIImage?) -> ()) {
+    func getImage(_ imageURL: URL, completion: @escaping (UIImage?) -> ()) {
         
         if (self.imageCache.object(forKey: imageURL as AnyObject)) != nil {
             
@@ -115,6 +115,8 @@ class RedditManager {
             imageTask.resume()
         }
     }
+    
+    
 }
 
 extension Date {

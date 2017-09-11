@@ -10,7 +10,6 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
     var redditEntries = [RedditEntry]()
 
     let redditManager = RedditManager();
@@ -47,12 +46,12 @@ class MasterViewController: UITableViewController {
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "show-detail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let entry = redditEntries[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-//                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                let controller = segue.destination as! DetailViewController
+                controller.redditManager = self.redditManager
+                controller.redditEntryItem = entry
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
@@ -78,7 +77,7 @@ class MasterViewController: UITableViewController {
         
         cell?.updateText(redditEntry.title, redditEntry.author, localCreatedDate, redditEntry.num_comments)
     
-        redditManager.getThumbNail(redditEntry.thumbnailURL) { (image) in
+        redditManager.getImage(redditEntry.thumbnailURL) { (image) in
 
             //make sure the cell is on screen
             if let updateCell = tableView.cellForRow(at: indexPath) as? RedditEntryTableViewCell {

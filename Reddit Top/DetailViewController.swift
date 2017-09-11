@@ -10,14 +10,26 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
 
+    public var redditManager: RedditManager? = nil
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
+        if let redditEntry = redditEntryItem {
+            
+            if let redditManager = self.redditManager {
+                
+                let imageView = UIImageView(frame: self.view.bounds)
+                imageView.contentMode = .scaleAspectFit
+                
+                redditManager.getImage(redditEntry.imageURL, completion: { (image) in
+                    
+                    if let img = image {
+                        imageView.image = img
+                        self.view.addSubview(imageView)
+                    }
+                    
+                })
             }
         }
     }
@@ -33,7 +45,7 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    var detailItem: NSDate? {
+    var redditEntryItem: RedditEntry? {
         didSet {
             // Update the view.
             configureView()
