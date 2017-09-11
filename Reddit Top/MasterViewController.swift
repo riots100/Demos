@@ -83,6 +83,8 @@ class MasterViewController: UITableViewController {
             if let updateCell = tableView.cellForRow(at: indexPath) as? RedditEntryTableViewCell {
                 if let img = image {
                     updateCell.updateThumbNailImage(img)
+                } else {
+                    updateCell.setPlaceholderImage()
                 }
             }
             

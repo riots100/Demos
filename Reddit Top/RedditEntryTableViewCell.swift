@@ -44,4 +44,10 @@ class RedditEntryTableViewCell: UITableViewCell {
         
     }
     
+    func setPlaceholderImage() {
+        
+        self.thumbnailImageView.image = UIImage(named: "Reddit_Logo.png")
+        self.thumbnailImageView.alpha = 0.5
+    }
+    
 }
