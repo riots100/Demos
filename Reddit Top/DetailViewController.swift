@@ -21,23 +21,26 @@ class DetailViewController: UIViewController {
                 
                 let imageView = UIImageView(frame: self.view.bounds)
                 imageView.contentMode = .scaleAspectFit
+                imageView.translatesAutoresizingMaskIntoConstraints = true
+                
+                let path = redditEntry.imageURL.pathExtension
+                
+                print("\(path)")
+
                 
                 redditManager.getImage(redditEntry.imageURL, completion: { (image) in
                     
                     if let img = image {
                         imageView.image = img
                         self.view.addSubview(imageView)
+                        // support rotation
+                        imageView.autoresizingMask = [UIViewAutoresizing.flexibleLeftMargin, UIViewAutoresizing.flexibleRightMargin, UIViewAutoresizing.flexibleTopMargin, UIViewAutoresizing.flexibleBottomMargin]
+
                     }
                     
                 })
             }
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        configureView()
     }
 
     override func didReceiveMemoryWarning() {
